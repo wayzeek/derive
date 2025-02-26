@@ -1,15 +1,16 @@
-import { EvmChain } from '../../vendored/daydreams/src/core/v1/chains/evm';
-import type { EvmChainConfig } from '../../vendored/daydreams/src/core/v1/chains/evm';
-import type { IChain } from '../../vendored/daydreams/src/core/v1/types';
+import { StoryClient } from '@story-protocol/core-sdk';
+import type { StoryConfig } from '@story-protocol/core-sdk';
+import { http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
 
 /**
- * Creates and returns a Story chain client
+ * Creates and returns a Story Protocol client
  * 
- * @returns An initialized Story chain client implementing the IChain interface
+ * @returns An initialized Story Protocol client
  * 
  * @example
  * ```typescript
@@ -17,7 +18,7 @@ dotenv.config();
  * const storyClient = createStoryClient();
  * ```
  */
-export function createStoryClient(): IChain {
+export function createStoryClient(): StoryClient {
   // Validate environment variables
   if (!process.env.STORY_RPC_URL) {
     throw new Error('STORY_RPC_URL is not defined in .env');
@@ -27,16 +28,17 @@ export function createStoryClient(): IChain {
     throw new Error('AGENT_PRIVATE_KEY is not defined in .env');
   }
   
-  // Create EVM chain configuration
-  const evmConfig: EvmChainConfig = {
-    chainName: 'story-aeneid-testnet',
-    rpcUrl: process.env.STORY_RPC_URL,
-    privateKey: process.env.AGENT_PRIVATE_KEY,
-    chainId: 1315,
+  // Create account from private key
+  const account = privateKeyToAccount(process.env.AGENT_PRIVATE_KEY as `0x${string}`);
+  
+  // Create Story Protocol client configuration
+  const config: StoryConfig = {
+    transport: http(process.env.STORY_RPC_URL),
+    account: account,
   };
   
-  // Create and return the Story client
-  return new EvmChain(evmConfig);
+  // Create and return the Story Protocol client
+  return StoryClient.newClient(config);
 }
 
 /**

@@ -22,10 +22,10 @@ const google = createGoogleGenerativeAI({
 
 const model = google("gemini-2.0-flash-001") as any;
 
-// Initialize Story client
+// Initialize Story Protocol client
 const storyClient = createStoryClient();
 
-// Create container and register Story client
+// Create container and register Story Protocol client
 const container = createContainer();
 container.register('storyClient', () => storyClient);
 
