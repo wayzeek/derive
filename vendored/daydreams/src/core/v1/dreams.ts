@@ -258,7 +258,7 @@ export function createDreams<
           ...output,
         }));
 
-      const maxSteps = 3;
+      const maxSteps = 10;
       let step = 1;
 
       const contextActions = await Promise.all(
