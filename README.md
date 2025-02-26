@@ -13,19 +13,27 @@ Derive is an AI agent framework built on the DaydreamsAI platform. It uses a goa
 
 - [Bun](https://bun.sh) v1.2.3 or higher
 - A Google API key for Gemini access
-- ChromaDB running locally (for vector storage)
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) for running ChromaDB and MongoDB
 
 ## Setup
 
 1. Clone the repository
-2. Create a `.env` file with your Google API key:
+2. Create a `.env` file with your Google API key and compose project name:
    ```
    GOOGLE_API_KEY=your_api_key_here
+   COMPOSE_PROJECT_NAME=derive
    ```
 3. Install dependencies:
    ```bash
    bun install
    ```
+4. Start the required services using Docker Compose:
+   ```bash
+   docker-compose up -d
+   ```
+   This will start:
+   - ChromaDB on port 8000 (for vector storage)
+   - MongoDB on port 27017
 
 ## Running the Agent
 
