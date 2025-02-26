@@ -1,18 +1,38 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import HomePage from './pages/Home'
-import Dashboard from './pages/Dashboard'
+import { useLocation } from "react-router-dom";
+
+import { AnimatePresence } from "framer-motion";
+import { useAccount } from "wagmi";
+
+import { Layout } from "./components/Layout/Layout";
+import { PageTransition } from "./components/transitions/PageTransition";
+import { AppRouter } from "./router/AppRouter";
 
 function App() {
+  const { isConnected } = useAccount();
+  const location = useLocation();
+
+  // Check if the current route is the Universal Music Demo page or the Home page
+  const isUniversalMusicDemo = location.pathname === "/demo/universal";
+  const isHomePage = location.pathname === "/";
+  const shouldHideSidebar = isUniversalMusicDemo || isHomePage;
+
   return (
-    <div className="min-h-full bg-derive-cloud">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* Additional routes will be added here */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+    <div className="min-h-screen bg-background">
+      <AnimatePresence mode="wait">
+        {shouldHideSidebar ? (
+          <PageTransition key={location.pathname}>
+            <AppRouter />
+          </PageTransition>
+        ) : (
+          <Layout key="layout" isWalletConnected={isConnected}>
+            <PageTransition key={location.pathname}>
+              <AppRouter />
+            </PageTransition>
+          </Layout>
+        )}
+      </AnimatePresence>
     </div>
-  )
+  );
 }
 
-export default App 
+export default App;
