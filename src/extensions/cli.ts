@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import fs from "fs";
 import path from "path";
 import axios from "axios";
+import WebSocket from "ws";
 
 const cliContext = context({
   type: "cli",
@@ -43,20 +44,12 @@ o888ooo88     88oooo888 o888o      o888o    888      88oooo888
   console.log(styles.header(header));
 };
 
-/**
- * Transforms partial format metadata to the standard format
- * @param partialMetadata The metadata in partial format
- * @returns Transformed metadata in standard format
- */
-function transformPartialMetadata(partialMetadata: any) {
-  // This is a placeholder - the agent will handle the actual transformation
-  return partialMetadata;
-}
-
 // Store the current metadata request ID for tracking responses
 let currentMetadataRequestId: string | null = null;
 let currentMetadata: any = null;
 const SERVER_PORT = process.env.PORT || 3000;
+// WebSocket connection to the server
+let serverWs: WebSocket | null = null;
 
 // Define the AgentMetadata interface for proper typing
 interface AgentMetadata {
@@ -67,6 +60,7 @@ interface AgentMetadata {
   getCurrentRequestId: () => string | null;
   getCurrentMetadata: () => any;
   setCurrentMetadata: (metadata: any) => void;
+  sendProgressUpdate: (step: string, message: string, percentage: number) => void;
 }
 
 // Define the MetadataProcessor interface for proper typing
@@ -100,6 +94,40 @@ const agentMetadataService = service({
       getCurrentMetadata: () => currentMetadata,
       setCurrentMetadata: (metadata: any) => {
         currentMetadata = metadata;
+      },
+      sendProgressUpdate: (step: string, message: string, percentage: number) => {
+        const requestId = currentMetadataRequestId;
+        if (!requestId) {
+          console.log(chalk.yellow('⚠️ Cannot send progress update: No active request ID'));
+          return;
+        }
+        
+        const progressData = {
+          requestId,
+          progress: {
+            step,
+            message,
+            percentage
+          }
+        };
+        
+        // Send via WebSocket if connected
+        if (serverWs && serverWs.readyState === WebSocket.OPEN) {
+          serverWs.send(JSON.stringify({
+            type: 'progress',
+            ...progressData
+          }));
+          console.log(chalk.blue(`📤 Sent progress update via WebSocket: ${step} - ${percentage}%`));
+        } else {
+          // Fallback to HTTP
+          axios.post(`http://localhost:${SERVER_PORT}/agent-response`, progressData)
+            .then(() => {
+              console.log(chalk.blue(`📤 Sent progress update via HTTP: ${step} - ${percentage}%`));
+            })
+            .catch(error => {
+              console.error(chalk.red('❌ Failed to send progress update:'), error);
+            });
+        }
       }
     }));
   },
@@ -114,11 +142,62 @@ const agentMetadataService = service({
     // Get the send function
     const agentMetadata = container.resolve("agentMetadata") as AgentMetadata;
     
-    // Endpoint to receive metadata from the backend server
-    app.post('/agent-metadata', (req, res) => {
-      const { metadata, message, requestId } = req.body;
-      
-      console.log(chalk.magenta.bold('\n📥 Received metadata from server'));
+    // Connect to the server via WebSocket
+    const connectToServer = () => {
+      try {
+        const wsUrl = `ws://localhost:${SERVER_PORT}/agent`;
+        console.log(chalk.cyan(`Connecting to server via WebSocket at ${wsUrl}...`));
+        
+        serverWs = new WebSocket(wsUrl);
+        
+        serverWs.on('open', () => {
+          console.log(chalk.green('✅ Connected to server via WebSocket'));
+          
+          // Send initial identification message
+          serverWs.send(JSON.stringify({
+            type: 'agent-connect',
+            agentId: 'metadata-agent',
+            timestamp: Date.now()
+          }));
+        });
+        
+        serverWs.on('message', (data) => {
+          try {
+            const message = JSON.parse(data.toString());
+            console.log(chalk.blue(`\n📥 Received WebSocket message from server`), message);
+            
+            // Handle different message types
+            if (message.type === 'ping') {
+              serverWs?.send(JSON.stringify({ type: 'pong', timestamp: Date.now() }));
+            } else if (message.type === 'metadata-request' && message.metadata && message.requestId) {
+              // Handle metadata request via WebSocket
+              handleMetadataRequest(message.metadata, message.message, message.requestId);
+            }
+          } catch (error) {
+            console.error(chalk.red('❌ Error parsing WebSocket message:'), error);
+          }
+        });
+        
+        serverWs.on('close', () => {
+          console.log(chalk.yellow('⚠️ WebSocket connection to server closed'));
+          // Try to reconnect after a delay
+          setTimeout(connectToServer, 5000);
+        });
+        
+        serverWs.on('error', (error) => {
+          console.error(chalk.red('❌ WebSocket error:'), error);
+          serverWs?.close();
+        });
+      } catch (error) {
+        console.error(chalk.red('❌ Failed to connect to server via WebSocket:'), error);
+        // Try to reconnect after a delay
+        setTimeout(connectToServer, 5000);
+      }
+    };
+    
+    // Helper function to handle metadata requests
+    const handleMetadataRequest = (metadata: any, message: string, requestId: string) => {
+      console.log(chalk.magenta.bold('\n📥 Received metadata request'));
       
       // Store the current request ID and metadata
       currentMetadataRequestId = requestId;
@@ -137,6 +216,9 @@ const agentMetadataService = service({
       try {
         const metadataProcessor = container.resolve('metadataProcessor') as MetadataProcessor;
         if (metadataProcessor) {
+          // Send progress update
+          agentMetadata.sendProgressUpdate('validation', 'Validating metadata format', 10);
+          
           // First validate the metadata
           if (typeof metadataProcessor.validateMetadata === 'function') {
             const validationResult = metadataProcessor.validateMetadata(metadata);
@@ -146,11 +228,13 @@ const agentMetadataService = service({
               metadataStatus = 'VALID';
               processedMetadata = metadata;
               console.log(chalk.green('✅ Metadata is valid and properly formatted'));
+              agentMetadata.sendProgressUpdate('validation', 'Metadata is valid and properly formatted', 30);
             } else if (validationResult.isValid && validationResult.formattingIssues) {
               // Metadata has all required information but formatting issues
               metadataStatus = 'REFORMATTED';
               processedMetadata = validationResult.processedMetadata;
               console.log(chalk.blue('🔄 Metadata has been reformatted'));
+              agentMetadata.sendProgressUpdate('reformatting', 'Reformatting metadata to standard format', 30);
             } else {
               // Metadata is missing required fields
               metadataStatus = 'INCOMPLETE';
@@ -158,15 +242,18 @@ const agentMetadataService = service({
               processedMetadata = validationResult.processedMetadata;
               console.log(chalk.yellow('⚠️ Metadata is incomplete'));
               console.log(chalk.yellow(`Missing fields: ${missingFields.join(', ')}`));
+              agentMetadata.sendProgressUpdate('validation', 'Metadata is incomplete, missing required fields', 30);
             }
           } else if (typeof metadataProcessor.processMetadata === 'function') {
             // Fall back to the old processing method
             processedMetadata = metadataProcessor.processMetadata(metadata);
             console.log(chalk.green('✅ Metadata processed successfully using legacy method'));
+            agentMetadata.sendProgressUpdate('processing', 'Metadata processed using legacy method', 30);
           }
         }
       } catch (error) {
         console.error(chalk.red('❌ Error processing metadata:'), error);
+        agentMetadata.sendProgressUpdate('error', 'Error processing metadata', 30);
       }
       
       // Send the metadata to the agent if send function is available
@@ -174,6 +261,8 @@ const agentMetadataService = service({
       if (sendFunction) {
         // Use the cliContext directly to ensure proper context handling
         let agentMessage = message || "Please process this metadata and return the processed result.";
+        
+        agentMetadata.sendProgressUpdate('agent', 'Sending metadata to agent for processing', 40);
         
         // Include both original and processed metadata
         sendFunction(
@@ -188,6 +277,14 @@ const agentMetadataService = service({
       } else {
         console.log(chalk.red('❌ Send function not available'));
       }
+    };
+    
+    // Endpoint to receive metadata from the backend server
+    app.post('/agent-metadata', (req, res) => {
+      const { metadata, message, requestId } = req.body;
+      
+      // Handle the metadata request
+      handleMetadataRequest(metadata, message, requestId);
       
       res.json({ success: true });
     });
@@ -195,6 +292,9 @@ const agentMetadataService = service({
     // Start the server
     app.listen(PORT, () => {
       console.log(chalk.cyan(`Agent is listening for metadata on port ${PORT}`));
+      
+      // Connect to the server via WebSocket
+      connectToServer();
     });
   }
 });
@@ -440,8 +540,7 @@ export const cli = extension({
           console.log(chalk.yellow('⚠️ Could not parse IP registration details from response'));
         }
         
-        // Send the response back to the server
-        axios.post(`http://localhost:${SERVER_PORT}/agent-response`, {
+        const responseData = {
           requestId: content.requestId,
           agentResponse: content.message,
           transformedMetadata: content.transformedMetadata,
@@ -449,14 +548,31 @@ export const cli = extension({
           missingFields: content.missingFields || [],
           status: content.status || "VALID",
           ipRegistration: content.ipRegistration || ipRegistration
-        }).then(() => {
-          console.log(chalk.green('✅ Response sent to server'));
+        };
+        
+        // Send via WebSocket if connected
+        if (serverWs && serverWs.readyState === WebSocket.OPEN) {
+          serverWs.send(JSON.stringify({
+            type: 'agent-response',
+            ...responseData
+          }));
+          console.log(chalk.green('✅ Response sent to server via WebSocket'));
           // Clear the current request ID and metadata after sending the response
           currentMetadataRequestId = null;
           currentMetadata = null;
-        }).catch(error => {
-          console.error(chalk.red('❌ Failed to send response to server:'), error);
-        });
+        } else {
+          // Fallback to HTTP
+          axios.post(`http://localhost:${SERVER_PORT}/agent-response`, responseData)
+            .then(() => {
+              console.log(chalk.green('✅ Response sent to server via HTTP'));
+              // Clear the current request ID and metadata after sending the response
+              currentMetadataRequestId = null;
+              currentMetadata = null;
+            })
+            .catch(error => {
+              console.error(chalk.red('❌ Failed to send response to server:'), error);
+            });
+        }
         
         return {
           data: content,

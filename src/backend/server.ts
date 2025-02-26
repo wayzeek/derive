@@ -45,6 +45,7 @@ export interface MetadataResponse {
 interface WebSocketClient extends WebSocket {
   requestId?: string;
   isAlive?: boolean;
+  isAgent?: boolean;
 }
 
 // Server configuration
@@ -55,6 +56,8 @@ const AGENT_PORT = process.env.AGENT_PORT || 3001;
 const pendingRequests: Map<string, express.Response> = new Map();
 // Store WebSocket clients for streaming updates
 const wsClients: Map<string, WebSocketClient> = new Map();
+// Store agent WebSocket connection
+let agentWs: WebSocketClient | null = null;
 
 // Metadata schema information to inject into the prompt
 const metadataSchemaInfo = `
@@ -170,8 +173,63 @@ function startServer() {
   
   // Set up WebSocket connection handling
   wss.on('connection', (ws: WebSocketClient, req) => {
-    // Extract requestId from URL
+    // Extract path from URL
     const url = new URL(req.url || '', `http://${req.headers.host}`);
+    const path = url.pathname;
+    
+    // Handle agent connections
+    if (path === '/agent') {
+      console.log(chalk.green(`\n🔄 Agent connected via WebSocket`));
+      ws.isAgent = true;
+      ws.isAlive = true;
+      agentWs = ws;
+      
+      // Handle agent messages
+      ws.on('message', (message) => {
+        try {
+          const data = JSON.parse(message.toString());
+          console.log(chalk.blue(`\n📥 Received WebSocket message from agent`), data);
+          
+          // Handle different message types
+          if (data.type === 'agent-connect') {
+            console.log(chalk.green(`✅ Agent identified: ${data.agentId}`));
+          } else if (data.type === 'agent-response') {
+            // Process agent response
+            handleAgentResponse(data);
+          } else if (data.type === 'progress') {
+            // Forward progress updates to the client
+            if (data.requestId && data.progress) {
+              sendWSUpdate(data.requestId, {
+                type: 'progress',
+                requestId: data.requestId,
+                timestamp: Date.now(),
+                progress: data.progress
+              });
+            }
+          } else if (data.type === 'pong') {
+            ws.isAlive = true;
+          }
+        } catch (error) {
+          console.error(chalk.red('❌ Error parsing WebSocket message from agent:'), error);
+        }
+      });
+      
+      // Handle agent disconnect
+      ws.on('close', () => {
+        console.log(chalk.yellow(`\n🔄 Agent disconnected from WebSocket`));
+        agentWs = null;
+      });
+      
+      // Handle errors
+      ws.on('error', (error) => {
+        console.error(chalk.red(`❌ Agent WebSocket error:`), error);
+        agentWs = null;
+      });
+      
+      return;
+    }
+    
+    // Handle client connections (existing code)
     const requestId = url.searchParams.get('requestId');
     
     if (!requestId) {
@@ -229,12 +287,93 @@ function startServer() {
     });
   });
   
+  // Helper function to handle agent responses via WebSocket
+  function handleAgentResponse(data: any) {
+    const { requestId, agentResponse, transformedMetadata, missingFields, status, ipRegistration, progress } = data;
+    
+    console.log(chalk.blue(`\n📥 Received agent response for request ID: ${requestId}`));
+    
+    // If this is a progress update, send it to the client via WebSocket and return
+    if (progress) {
+      console.log(chalk.cyan(`\n🔄 Progress update: ${progress.step} - ${progress.percentage}%`));
+      sendWSUpdate(requestId, {
+        type: 'progress',
+        requestId,
+        timestamp: Date.now(),
+        progress
+      });
+      return;
+    }
+    
+    // Create the final response with the agent's answer
+    const response: MetadataResponse = {
+      timestamp: Date.now(),
+      success: true,
+      metadata: data.originalMetadata || null,
+      message: 'Metadata processed successfully',
+      agentResponse,
+      processedMetadata: transformedMetadata,
+      missingFields: missingFields || [],
+      status: status || 'VALID',
+      ipRegistration: ipRegistration || null
+    };
+    
+    // Send the final update via WebSocket if there's a client connected
+    sendWSUpdate(requestId, {
+      type: 'complete',
+      requestId,
+      timestamp: Date.now(),
+      response
+    });
+    
+    // If we have transformed metadata, save it to a file
+    if (transformedMetadata) {
+      const outputPath = path.join(process.cwd(), 'src', 'samples', 'processed-metadata.json');
+      fs.writeFileSync(outputPath, JSON.stringify(transformedMetadata, null, 2));
+      console.log(chalk.green(`📝 Processed metadata saved to: ${outputPath}`));
+      
+      // Log a summary of the processed metadata
+      console.log(chalk.cyan('\n📋 Processed Metadata Summary:'));
+      if (transformedMetadata.release && transformedMetadata.submitter) {
+        console.log(chalk.cyan(`Title: ${transformedMetadata.release.title || 'N/A'}`));
+        console.log(chalk.cyan(`Type: ${transformedMetadata.release.type || 'N/A'}`));
+        console.log(chalk.cyan(`Tracks: ${transformedMetadata.release.tracks?.length || 0}`));
+        console.log(chalk.cyan(`Submitter: ${transformedMetadata.submitter.name || 'N/A'}`));
+        console.log(chalk.cyan(`Status: ${status || 'N/A'}`));
+        
+        if (status === 'INCOMPLETE' && missingFields && missingFields.length > 0) {
+          console.log(chalk.yellow(`⚠️ Missing fields: ${missingFields.join(', ')}`));
+        }
+        
+        // Log IP registration details if available
+        if (ipRegistration) {
+          console.log(chalk.green('\n🔗 IP Registration Details:'));
+          console.log(chalk.green(`IP ID: ${ipRegistration.ipId || 'N/A'}`));
+          console.log(chalk.green(`Transaction Hash: ${ipRegistration.transactionHash || 'N/A'}`));
+          console.log(chalk.green(`Status: ${ipRegistration.success ? 'Success' : 'Failed'}`));
+          
+          // Save IP registration details to a file
+          const registrationPath = path.join(process.cwd(), 'src', 'samples', 'ip-registration.json');
+          fs.writeFileSync(registrationPath, JSON.stringify(ipRegistration, null, 2));
+          console.log(chalk.green(`📝 IP registration details saved to: ${registrationPath}`));
+        }
+      } else {
+        console.log(chalk.yellow('⚠️ Processed metadata is not in the expected format'));
+      }
+    } else {
+      console.log(chalk.yellow('⚠️ No processed metadata received from agent'));
+    }
+  }
+  
   // Set up a heartbeat interval to check for dead connections
   const heartbeatInterval = setInterval(() => {
     wss.clients.forEach((ws: WebSocketClient) => {
       if (ws.isAlive === false) {
         if (ws.requestId) {
           wsClients.delete(ws.requestId);
+        }
+        if (ws.isAgent) {
+          agentWs = null;
         }
         return ws.terminate();
       }
@@ -279,7 +418,31 @@ function startServer() {
         }
       }, 60000); // 60 second timeout
       
-      // Forward the metadata to the agent
+      // Try to send metadata to agent via WebSocket first
+      if (agentWs && agentWs.readyState === WebSocket.OPEN) {
+        agentWs.send(JSON.stringify({
+          type: 'metadata-request',
+          metadata: metadata,
+          requestId,
+          message: `You are a metadata processing and IP registration expert. Your task is to process the provided music metadata according to the schema and rules below, then register it as an IP asset on Story Protocol. ${metadataSchemaInfo}`
+        }));
+        console.log(chalk.green(`✅ Metadata sent to agent via WebSocket with request ID: ${requestId}`));
+        console.log(chalk.yellow('⏳ Waiting for agent response...'));
+        
+        // Return the requestId to the client so they can connect via WebSocket
+        res.json({ 
+          success: true, 
+          message: 'Metadata received and processing started',
+          requestId,
+          wsEndpoint: `ws://localhost:${PORT}/ws?requestId=${requestId}`
+        });
+        
+        // Remove from pending requests since we've already responded
+        pendingRequests.delete(requestId);
+        return;
+      }
+      
+      // Fallback to HTTP if WebSocket is not available
       try {
         await axios.post(`http://localhost:${AGENT_PORT}/agent-metadata`, {
           metadata: metadata,
@@ -324,7 +487,7 @@ function startServer() {
   });
   
   // Endpoint to receive responses from the agent
-  app.post('/agent-response', (req, res) => {
+  app.post('/agent-response', (req: express.Request, res: express.Response) => {
     const { requestId, agentResponse, transformedMetadata, missingFields, status, ipRegistration, progress } = req.body;
     
     console.log(chalk.blue(`\n📥 Received agent response for request ID: ${requestId}`));
