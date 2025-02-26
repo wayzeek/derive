@@ -1,6 +1,6 @@
 import { StoryClient } from '@story-protocol/core-sdk';
 import type { StoryConfig } from '@story-protocol/core-sdk';
-import { http } from 'viem';
+import { http, zeroAddress } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import dotenv from 'dotenv';
 
@@ -53,4 +53,31 @@ export function getAgentAddress(): string {
   }
   
   return process.env.AGENT_ADDRESS;
+}
+
+
+// Create a new SPG NFT collection
+//
+// NOTE: Use this code to create a new SPG NFT collection. You can then use the
+// `newCollection.spgNftContract` address as the `spgNftContract` argument in
+// functions like `mintAndRegisterIpAssetWithPilTerms` in the
+// `simpleMintAndRegisterSpg.ts` file.
+//
+// You will mostly only have to do this once. Once you get your nft contract address,
+// you can use it in SPG functions.
+//
+export async function createSPGCollection() {
+  const client = createStoryClient();
+  const newCollection = await client.nftClient.createNFTCollection({
+    name: 'Derive Protocol',
+    symbol: 'DERIVE',
+  isPublicMinting: true,
+  mintOpen: true,
+  mintFeeRecipient: zeroAddress,
+    contractURI: '',
+    txOptions: { waitForTransaction: true },
+  })
+
+  console.log(`New SPG NFT collection created at transaction hash ${newCollection.txHash}`)
+  console.log(`NFT contract address: ${newCollection.spgNftContract}`)
 }

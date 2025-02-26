@@ -1,6 +1,56 @@
-# Derive
+# Derive - Metadata Processing System
 
-Derive is an AI agent framework built on the DaydreamsAI platform. It uses a goal-oriented approach to manage and execute tasks through a structured planning system.
+This system processes music metadata through a separate backend server and agent.
+
+## Architecture
+
+The system consists of two main components:
+
+1. **Backend Server** - Handles metadata validation and processing
+2. **Agent** - Receives processed metadata and interacts with users
+
+## How to Use
+
+### Step 1: Start the Backend Server (Terminal 1)
+
+```bash
+bun run src/start-server.ts
+```
+
+This will start the metadata processing server on port 3000.
+
+### Step 2: Start the Agent (Terminal 2)
+
+```bash
+bun run src/agent.ts
+```
+
+This will start the agent on port 3001, which will display the CLI interface.
+
+### Step 3: Send Metadata (Terminal 3)
+
+Use curl to send metadata to the backend server:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d @src/samples/sample-metadata.json http://localhost:3000/metadata
+```
+
+### Step 4: View Results
+
+The processed metadata will be displayed in the agent terminal (Terminal 2).
+
+## Sample Files
+
+- `src/samples/sample-metadata.json` - Complete metadata example
+- `src/samples/incomplete-metadata.json` - Incomplete metadata example for testing validation
+
+## Testing
+
+You can run the test workflow script to test the entire system:
+
+```bash
+bash src/samples/test-workflow.sh
+```
 
 ## Features
 
@@ -35,22 +85,7 @@ Derive is an AI agent framework built on the DaydreamsAI platform. It uses a goa
    - ChromaDB on port 8000 (for vector storage)
    - MongoDB on port 27017
 
-## Running the Agent
-
-Start the agent with:
-
-```bash
-bun run src/agent.ts
-```
-
 ## Project Structure
 
 - `src/agent.ts` - Main agent configuration and initialization
-- `src/contexts/` - Context definitions for agent memory and state
-- `src/actions/` - Action definitions that the agent can perform
-- `src/outputs/` - Output handlers for agent responses
-- `src/extensions/` - Extensions including the CLI interface
-
-## Development
-
-This project was created using `bun init` in bun v1.2.3. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- `src/contexts/`

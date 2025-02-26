@@ -1,0 +1,10 @@
+{
+  "ipId": "0xB18dFCd14733F353e0D8AEC8C854ADbbBC4a1D27",
+  "transactionHash": "0xf9eebfd5134e5e439fbc79cda77d067df188dbab55f3be3d652446031ed81ab4",
+  "success": true,
+  "message": "IP asset registered successfully",
+  "metadata": {
+    "ipMetadataURI": "ipfs://bafkreihh3nvs56d5yjse7zx55ufhlmrbyjb7tjemjbinsqjpceodrw6ax4",
+    "nftMetadataURI": "ipfs://bafkreigt27wds6oflldrpsfmci573qcvmw2eud4e3stt6wsuzgv5edg7tm"
+  }
+}

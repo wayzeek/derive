@@ -1,0 +1,146 @@
+{
+  "release": {
+    "title": "Midnight Dreams",
+    "type": "EP",
+    "upc": "",
+    "catalogNumber": "DERIVE001",
+    "releaseDate": "2024-08-15",
+    "label": {
+      "name": "Dérive Records",
+      "id": ""
+    },
+    "genre": ["Electronic", "Ambient"],
+    "territories": ["WORLDWIDE"],
+    "distributionPlatforms": ["Spotify", "Apple Music"],
+    "tracks": [
+      {
+        "position": 1,
+        "title": "Lunar Echoes",
+        "duration": "4:32",
+        "isrc": "",
+        "explicit": false,
+        "language": "en",
+        
+        "composition": {
+          "title": "Lunar Echoes",
+          "iswc": "",
+          "writers": [
+            {
+              "name": "Alex Rivera",
+              "ipi": "",
+              "role": "Composer",
+              "split": 70.0,
+              "publisher": {
+                "name": "Dérive Publishing",
+                "ipi": "",
+                "split": 50.0
+              },
+              "pro": "ASCAP"
+            }
+          ],
+          "rights": {
+            "moralRights": {
+              "attribution": true,
+              "integrity": true,
+              "disclosure": true,
+              "withdrawal": false
+            },
+            "publicPerformingRights": {
+              "holders": [
+                {
+                  "entity": "Alex Rivera",
+                  "percentage": 50.0,
+                  "collectingOrganization": "ASCAP"
+                },
+                {
+                  "entity": "Dérive Publishing",
+                  "percentage": 50.0,
+                  "collectingOrganization": "ASCAP"
+                }
+              ],
+              "restrictions": []
+            },
+            "mechanicalRights": {
+              "holders": [
+                {
+                  "entity": "Alex Rivera",
+                  "percentage": 50.0
+                },
+                {
+                  "entity": "Dérive Publishing",
+                  "percentage": 50.0
+                }
+              ],
+              "statutoryRate": true,
+              "customRate": null
+            }
+          }
+        },
+        
+        "recording": {
+          "performers": [
+            {
+              "name": "Lunar Drift",
+              "isni": "",
+              "role": "MainArtist",
+              "split": 100.0
+            }
+          ],
+          "producers": [],
+          "masterOwner": {
+            "name": "Dérive Records",
+            "percentage": 100.0
+          },
+          "rights": {
+            "neighbouringRights": {
+              "holders": [
+                {
+                  "entity": "Lunar Drift",
+                  "role": "MainArtist",
+                  "percentage": 50.0,
+                  "collectingOrganization": "SoundExchange"
+                },
+                {
+                  "entity": "Dérive Records",
+                  "role": "MasterOwner",
+                  "percentage": 50.0,
+                  "collectingOrganization": "SoundExchange"
+                }
+              ]
+            },
+            "masterLicenseTerms": {
+              "allowSampling": false,
+              "samplingFee": "",
+              "allowSynchronization": false,
+              "territorialRestrictions": [],
+              "exclusivity": false
+            },
+            "performanceRoyalties": {
+              "streamingRate": "",
+              "radioRate": "",
+              "publicVenueRate": ""
+            }
+          }
+        },
+        
+        "storyProtocolMetadata": {
+          "ipAssetType": "SOUND_RECORDING",
+          "parentIpAssetId": "",
+          "licenseTemplate": "",
+          "attestations": [],
+          "disputeResolution": "",
+          "additionalTerms": {}
+        }
+      }
+    ]
+  },
+  
+  "submitter": {
+    "name": "Morgan Lee",
+    "role": "LabelRepresentative",
+    "walletAddress": "",
+    "email": "morgan@deriverecords.com",
+    "timestamp": "2024-07-01T12:00:00Z",
+    "signature": ""
+  }
+} 

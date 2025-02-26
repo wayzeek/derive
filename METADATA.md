@@ -6,7 +6,6 @@ This schema encompasses all major music identifiers (ISRC, ISWC, UPC) and rights
 
 ```json
 {
-  "$schema": "https://derive.ai/schemas/music-metadata/v1.0",
   "release": {
     "title": "Album Title",
     "type": "album", // album, single, EP
@@ -148,33 +147,9 @@ This schema encompasses all major music identifiers (ISRC, ISWC, UPC) and rights
             }
           }
         },
-        
-        "storyProtocolMetadata": {
-          "ipAssetType": "SOUND_RECORDING",
-          "parentIpAssetId": "", // For remixes, samples, etc.
-          "licenseTemplate": "MUSIC_STANDARD_V1",
-          "attestations": [
-            {
-              "attester": "DerivePlatform",
-              "attestationType": "METADATA_VERIFICATION",
-              "timestamp": "2024-07-01T12:00:00Z"
-            }
-          ],
-          "disputeResolution": "ARBITRATION",
-          "additionalTerms": {}
-        }
       }
     ]
   },
-  
-  "submitter": {
-    "name": "Submitter Name",
-    "role": "LabelRepresentative",
-    "walletAddress": "0x123...",
-    "email": "contact@example.com",
-    "timestamp": "2024-07-01T12:00:00Z",
-    "signature": "0x..."
-  }
 }
 ```
 
