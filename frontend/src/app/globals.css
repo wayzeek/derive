@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-derive-cloud text-derive-grey;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-derive-purple;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+
+  a {
+    @apply text-derive-bright-red hover:text-derive-deep-red;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-derive-bright-red text-white rounded-md hover:bg-derive-deep-red transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-derive-purple text-white rounded-md hover:bg-opacity-90 transition-colors;
+  }
+  
+  .card {
+    @apply p-6 bg-white rounded-lg shadow-md border border-gray-100;
+  }
+  
+  .input {
+    @apply px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-derive-purple;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-red {
+    @apply badge bg-derive-bright-red bg-opacity-10 text-derive-bright-red;
+  }
+
+  .badge-purple {
+    @apply badge bg-derive-purple bg-opacity-10 text-derive-purple;
+  }
+
+  .badge-grey {
+    @apply badge bg-derive-grey bg-opacity-10 text-derive-grey;
+  }
+}

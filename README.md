@@ -1,6 +1,6 @@
-# Derive
+# Dérive
 
-Derive is an AI agent framework built on the DaydreamsAI platform. It uses a goal-oriented approach to manage and execute tasks through a structured planning system.
+Dérive is an AI agent framework built on the DaydreamsAI platform. It uses a goal-oriented approach to manage and execute tasks through a structured planning system.
 
 ## Features
 
