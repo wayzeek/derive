@@ -14,11 +14,12 @@
   "dependencies": {
     "@ai-sdk/google": "^1.1.17",
     "@daydreamsai/core": "file:vendored/daydreams",
+    "@story-protocol/core-sdk": "^1.3.0-beta.3",
     "chromadb": "^1.10.4",
     "dotenv": "^16.4.7",
     "graphql": "^16.10.0",
     "graphql-request": "^7.1.2",
-    "starknet": "^6.23.1",
+    "viem": "^2.23.5",
     "zod": "^3.24.2"
   },
   "private": true
