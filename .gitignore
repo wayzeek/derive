@@ -1,6 +1,13 @@
 # dependencies (bun install)
 node_modules
 
+# context
+CATEGORIES.md
+RESEARCH.md
+SUMMARY.md
+/frontend/INTEGRATION.md
+/frontend/example/
+
 # output
 out
 dist
