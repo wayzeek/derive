@@ -1,0 +1,104 @@
+name: Deploy to Digital Ocean
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - 'src/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      AGENT_PRIVATE_KEY: ${{ secrets.AGENT_PRIVATE_KEY }}
+      AGENT_ADDRESS: ${{ secrets.AGENT_ADDRESS }}
+      STORY_RPC_URL: ${{ secrets.STORY_RPC_URL }}
+      STORY_SPG_NFT_CONTRACT: ${{ secrets.STORY_SPG_NFT_CONTRACT }}
+      PINATA_JWT: ${{ secrets.PINATA_JWT }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Test Frontend
+        run: |
+          cd frontend
+          bun test
+
+      - name: Build Project
+        env:
+          AGENT_PRIVATE_KEY: ${{ secrets.AGENT_PRIVATE_KEY }}
+          AGENT_ADDRESS: ${{ secrets.AGENT_ADDRESS }}
+          STORY_RPC_URL: ${{ secrets.STORY_RPC_URL }}
+          STORY_SPG_NFT_CONTRACT: ${{ secrets.STORY_SPG_NFT_CONTRACT }}
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: bun run build
+
+      - name: Deploy to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: root
+          key: ${{ secrets.DO_SSH_KEY }}
+          source: '.'
+          target: '/var/www/derive'
+          overwrite: true
+
+      - name: SSH into Digital Ocean and Start Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: root
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            cd /var/www/derive
+            curl -fsSL https://bun.sh/install | bash
+            export BUN_INSTALL="$HOME/.bun"
+            export PATH="$BUN_INSTALL/bin:$PATH"
+            bun install
+            pm2 delete derive-app || true
+            pm2 start --interpreter ~/.bun/bin/bun --name "derive-app" -- start
+
+  notify:
+    runs-on: ubuntu-22.04
+    needs: build
+    if: always()
+    steps:
+      - name: Checkout Code in Notify
+        uses: actions/checkout@v3
+
+      - name: Get Commit Hash
+        id: commit-details
+        run: |
+          COMMIT_HASH=$(git log -1 --pretty=%h)
+          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_ENV
+
+      - name: Notify Slack
+        if: always()
+        run: |
+          STATUS="${{ needs.build.result }}"
+          COMMIT_HASH="${{ env.commit_hash }}"
+          ACTOR="${{ github.actor }}"
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "text": "*deployment:* derive\n*outcome:* '"$STATUS"'\n*entity:* '"$ACTOR"'\n*hash:* '"$COMMIT_HASH"'"
+          }' \
+          ${{ secrets.SLACK_WEBHOOK_URL }} 
