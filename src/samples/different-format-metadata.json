@@ -1,0 +1,341 @@
+{
+  "albumInfo": {
+    "name": "Midnight Dreams",
+    "releaseFormat": "EP",
+    "barcode": "123456789012",
+    "catalogId": "DERIVE001",
+    "releaseDate": "2024-08-15",
+    "recordLabel": "Dérive Records",
+    "labelId": "DERIVE_LABEL_001",
+    "musicStyles": ["Electronic", "Ambient", "Downtempo"],
+    "territories": ["WORLDWIDE"],
+    "distribution": ["Spotify", "Apple Music", "Tidal", "Bandcamp", "SoundCloud"]
+  },
+  "songs": [
+    {
+      "trackNumber": 1,
+      "songTitle": "Lunar Echoes",
+      "length": "4:32",
+      "isrcCode": "USRC12345678",
+      "containsExplicitContent": false,
+      "songLanguage": "en",
+      
+      "songwritingInfo": {
+        "title": "Lunar Echoes",
+        "iswcCode": "T-123456789-0",
+        "writers": [
+          {
+            "fullName": "Alex Rivera",
+            "ipiNumber": "00000000250",
+            "writerRole": "Composer",
+            "percentageShare": 70.0,
+            "publishingCompany": {
+              "companyName": "Dérive Publishing",
+              "ipiNumber": "00000000251",
+              "percentageShare": 50.0
+            },
+            "performingRightsOrg": "ASCAP"
+          },
+          {
+            "fullName": "Jamie Chen",
+            "ipiNumber": "00000000252",
+            "writerRole": "Lyricist",
+            "percentageShare": 30.0,
+            "publishingCompany": {
+              "companyName": "Moonlight Publishing",
+              "ipiNumber": "00000000253",
+              "percentageShare": 50.0
+            },
+            "performingRightsOrg": "BMI"
+          }
+        ],
+        "rightsInfo": {
+          "moralRights": {
+            "attribution": true,
+            "integrity": true,
+            "disclosure": true,
+            "withdrawal": false
+          },
+          "performingRights": {
+            "rightsHolders": [
+              {
+                "name": "Alex Rivera",
+                "percentage": 35.0,
+                "collectingOrg": "ASCAP"
+              },
+              {
+                "name": "Dérive Publishing",
+                "percentage": 35.0,
+                "collectingOrg": "ASCAP"
+              },
+              {
+                "name": "Jamie Chen",
+                "percentage": 15.0,
+                "collectingOrg": "BMI"
+              },
+              {
+                "name": "Moonlight Publishing",
+                "percentage": 15.0,
+                "collectingOrg": "BMI"
+              }
+            ],
+            "restrictions": []
+          },
+          "mechanicalRights": {
+            "rightsHolders": [
+              {
+                "name": "Alex Rivera",
+                "percentage": 35.0
+              },
+              {
+                "name": "Dérive Publishing",
+                "percentage": 35.0
+              },
+              {
+                "name": "Jamie Chen",
+                "percentage": 15.0
+              },
+              {
+                "name": "Moonlight Publishing",
+                "percentage": 15.0
+              }
+            ],
+            "useStatutoryRate": true,
+            "customRateIfAny": null
+          }
+        }
+      },
+      
+      "recordingInfo": {
+        "performers": [
+          {
+            "artistName": "Lunar Drift",
+            "isniNumber": "0000000121212121",
+            "performerRole": "MainArtist",
+            "percentageShare": 80.0
+          },
+          {
+            "artistName": "Echo Void",
+            "isniNumber": "0000000343434343",
+            "performerRole": "FeaturedArtist",
+            "percentageShare": 20.0
+          }
+        ],
+        "producers": [
+          {
+            "producerName": "Sam Taylor",
+            "producerRole": "Producer",
+            "percentageShare": 5.0
+          }
+        ],
+        "masterOwnership": {
+          "ownerName": "Dérive Records",
+          "ownershipPercentage": 95.0
+        },
+        "rightsInfo": {
+          "neighbouringRights": {
+            "rightsHolders": [
+              {
+                "name": "Lunar Drift",
+                "role": "MainArtist",
+                "percentage": 40.0,
+                "collectingOrg": "SoundExchange"
+              },
+              {
+                "name": "Echo Void",
+                "role": "FeaturedArtist",
+                "percentage": 5.0,
+                "collectingOrg": "SoundExchange"
+              },
+              {
+                "name": "Dérive Records",
+                "role": "MasterOwner",
+                "percentage": 50.0,
+                "collectingOrg": "SoundExchange"
+              },
+              {
+                "name": "Sam Taylor",
+                "role": "Producer",
+                "percentage": 5.0,
+                "collectingOrg": "SoundExchange"
+              }
+            ]
+          },
+          "masterLicenseTerms": {
+            "allowSampling": true,
+            "samplingFee": "Negotiable",
+            "allowSynchronization": true,
+            "territorialRestrictions": [],
+            "exclusivity": false
+          },
+          "performanceRoyalties": {
+            "streamingRate": "Standard",
+            "radioRate": "Standard",
+            "publicVenueRate": "Standard"
+          }
+        }
+      },
+      
+      "storyProtocolData": {
+        "assetType": "SOUND_RECORDING",
+        "parentAssetId": "",
+        "licenseTemplateId": "MUSIC_STANDARD_V1",
+        "verifications": [
+          {
+            "verifier": "DerivePlatform",
+            "verificationType": "METADATA_VERIFICATION",
+            "verificationTime": "2024-07-01T12:00:00Z"
+          }
+        ],
+        "disputeResolutionMethod": "ARBITRATION",
+        "extraTerms": {}
+      }
+    },
+    {
+      "trackNumber": 2,
+      "songTitle": "Digital Dreams",
+      "length": "5:17",
+      "isrcCode": "USRC87654321",
+      "containsExplicitContent": false,
+      "songLanguage": "en",
+      
+      "songwritingInfo": {
+        "title": "Digital Dreams",
+        "iswcCode": "T-987654321-0",
+        "writers": [
+          {
+            "fullName": "Alex Rivera",
+            "ipiNumber": "00000000250",
+            "writerRole": "Composer",
+            "percentageShare": 100.0,
+            "publishingCompany": {
+              "companyName": "Dérive Publishing",
+              "ipiNumber": "00000000251",
+              "percentageShare": 50.0
+            },
+            "performingRightsOrg": "ASCAP"
+          }
+        ],
+        "rightsInfo": {
+          "moralRights": {
+            "attribution": true,
+            "integrity": true,
+            "disclosure": true,
+            "withdrawal": false
+          },
+          "performingRights": {
+            "rightsHolders": [
+              {
+                "name": "Alex Rivera",
+                "percentage": 50.0,
+                "collectingOrg": "ASCAP"
+              },
+              {
+                "name": "Dérive Publishing",
+                "percentage": 50.0,
+                "collectingOrg": "ASCAP"
+              }
+            ],
+            "restrictions": []
+          },
+          "mechanicalRights": {
+            "rightsHolders": [
+              {
+                "name": "Alex Rivera",
+                "percentage": 50.0
+              },
+              {
+                "name": "Dérive Publishing",
+                "percentage": 50.0
+              }
+            ],
+            "useStatutoryRate": true,
+            "customRateIfAny": null
+          }
+        }
+      },
+      
+      "recordingInfo": {
+        "performers": [
+          {
+            "artistName": "Lunar Drift",
+            "isniNumber": "0000000121212121",
+            "performerRole": "MainArtist",
+            "percentageShare": 100.0
+          }
+        ],
+        "producers": [
+          {
+            "producerName": "Sam Taylor",
+            "producerRole": "Producer",
+            "percentageShare": 5.0
+          }
+        ],
+        "masterOwnership": {
+          "ownerName": "Dérive Records",
+          "ownershipPercentage": 95.0
+        },
+        "rightsInfo": {
+          "neighbouringRights": {
+            "rightsHolders": [
+              {
+                "name": "Lunar Drift",
+                "role": "MainArtist",
+                "percentage": 45.0,
+                "collectingOrg": "SoundExchange"
+              },
+              {
+                "name": "Dérive Records",
+                "role": "MasterOwner",
+                "percentage": 50.0,
+                "collectingOrg": "SoundExchange"
+              },
+              {
+                "name": "Sam Taylor",
+                "role": "Producer",
+                "percentage": 5.0,
+                "collectingOrg": "SoundExchange"
+              }
+            ]
+          },
+          "masterLicenseTerms": {
+            "allowSampling": true,
+            "samplingFee": "Negotiable",
+            "allowSynchronization": true,
+            "territorialRestrictions": [],
+            "exclusivity": false
+          },
+          "performanceRoyalties": {
+            "streamingRate": "Standard",
+            "radioRate": "Standard",
+            "publicVenueRate": "Standard"
+          }
+        }
+      },
+      
+      "storyProtocolData": {
+        "assetType": "SOUND_RECORDING",
+        "parentAssetId": "",
+        "licenseTemplateId": "MUSIC_STANDARD_V1",
+        "verifications": [
+          {
+            "verifier": "DerivePlatform",
+            "verificationType": "METADATA_VERIFICATION",
+            "verificationTime": "2024-07-01T12:00:00Z"
+          }
+        ],
+        "disputeResolutionMethod": "ARBITRATION",
+        "extraTerms": {}
+      }
+    }
+  ],
+  
+  "submitterInfo": {
+    "submitterName": "Morgan Lee",
+    "submitterRole": "LabelRepresentative",
+    "walletAddress": "0x123abc456def789ghi012jkl345mno678pqr",
+    "emailAddress": "morgan@deriverecords.com",
+    "submissionTime": "2024-07-01T12:00:00Z",
+    "digitalSignature": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+  }
+} 
