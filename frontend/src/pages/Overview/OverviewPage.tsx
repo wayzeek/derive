@@ -821,7 +821,7 @@ export const OverviewPage = () => {
                   `${(percent * 100).toFixed(0)}%`
                 }
               >
-                {mockRightsDistribution.map((entry, index) => (
+                {mockRightsDistribution.map((_entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={RIGHTS_COLORS[index % RIGHTS_COLORS.length]}

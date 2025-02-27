@@ -5,43 +5,10 @@ import { PermissionsPage } from "../pages/Permissions/PermissionsPage";
 import { TransactionsPage } from "../pages/Transactions/TransactionsPage";
 import { UniversalMusicDemo } from "../pages/Demo/UniversalMusicDemo";
 import { Home } from "../pages/Home/HomePage";
-
-// Placeholder components for new pages
-const SubmissionsPage = () => (
-  <div className="p-8">
-    <h1 className="mb-4 text-2xl font-semibold">Submissions</h1>
-    <p className="text-text-secondary">
-      This page will display music rights submission management.
-    </p>
-  </div>
-);
-
-const MetadataPage = () => (
-  <div className="p-8">
-    <h1 className="mb-4 text-2xl font-semibold">Metadata</h1>
-    <p className="text-text-secondary">
-      This page will display music metadata management.
-    </p>
-  </div>
-);
-
-const RoyaltiesPage = () => (
-  <div className="p-8">
-    <h1 className="mb-4 text-2xl font-semibold">Royalties</h1>
-    <p className="text-text-secondary">
-      This page will display music royalties management.
-    </p>
-  </div>
-);
-
-const DistributionsPage = () => (
-  <div className="p-8">
-    <h1 className="mb-4 text-2xl font-semibold">Distributions</h1>
-    <p className="text-text-secondary">
-      This page will display music royalty distributions management.
-    </p>
-  </div>
-);
+import { SubmissionsPage } from "../pages/Submissions/SubmissionsPage";
+import { MetadataPage } from "../pages/Metadata/MetadataPage";
+import { RoyaltiesPage } from "../pages/Royalties/RoyaltiesPage";
+import { DistributionsPage } from "../pages/Distributions/DistributionsPage";
 
 export const AppRouter = () => {
   const location = useLocation();
