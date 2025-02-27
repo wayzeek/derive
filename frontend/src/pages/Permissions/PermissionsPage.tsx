@@ -1,4 +1,4 @@
-import { PermissionsTable } from "../../components/permissions/PermissionsTable";
+import { PermissionsTable } from "../../components/Permissions/PermissionsTable";
 
 const SAMPLE_WALLETS = [
   {

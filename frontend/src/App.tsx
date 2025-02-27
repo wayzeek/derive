@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useAccount } from "wagmi";
 
 import { Layout } from "./components/Layout/Layout";
-import { PageTransition } from "./components/transitions/PageTransition";
+import { PageTransition } from "./components/Transitions/PageTransition";
 import { AppRouter } from "./router/AppRouter";
 
 function App() {
