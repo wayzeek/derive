@@ -1,9 +1,17 @@
 # Derive
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+<p align="center">
+  <img src="derive.png" alt="Derive Logo" width="120" height="120" />
+</p>
 
-> Bridging music distributors and Story Protocol to create a unified source of truth for music rights and ownership
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
+  <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="Version" />
+</p>
+
+<p align="center">
+  <i>Bridging music distributors and Story Protocol to create a unified source of truth for music rights and ownership</i>
+</p>
 
 ## 📖 Overview
 
