@@ -3,7 +3,9 @@
   "module": "src/agent.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run src/agent.ts"
+    "start": "concurrently \"bun run src/agent.ts\" \"bun run src/backend/server.ts\"",
+    "start:agent": "bun run src/agent.ts",
+    "start:server": "bun run src/backend/server.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.2.4",

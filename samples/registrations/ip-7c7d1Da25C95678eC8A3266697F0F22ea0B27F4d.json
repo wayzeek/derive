@@ -1,0 +1,663 @@
+{
+  "ipId": "0x7c7d1Da25C95678eC8A3266697F0F22ea0B27F4d",
+  "transactionHash": "0x64a3dd7426e7a309c7d19c806293ec06936d895b3d8db4053c2d58facc4c088b",
+  "metadata": {
+    "original": {
+      "release": {
+        "title": "New Single 2025",
+        "type": "single",
+        "upc": "64757330924365",
+        "catalogNumber": "CAP001-7911",
+        "releaseDate": "2025-03-27",
+        "label": {
+          "name": "Capitol Records",
+          "id": "CAP001"
+        },
+        "genre": [
+          "Rock",
+          "Jazz",
+          "Classical",
+          "Folk"
+        ],
+        "territories": [
+          "WORLDWIDE",
+          "AFRICA"
+        ],
+        "distributionPlatforms": [
+          "Spotify",
+          "Amazon Music",
+          "YouTube Music",
+          "Deezer",
+          "Pandora",
+          "SoundCloud"
+        ],
+        "tracks": [
+          {
+            "position": 1,
+            "title": "Summer Breeze",
+            "duration": "3:30",
+            "isrc": "USUMG2508217",
+            "explicit": false,
+            "language": "en",
+            "composition": {
+              "title": "Summer Breeze (Original Mix)",
+              "iswc": "T-665418690-3",
+              "writers": [
+                {
+                  "name": "John Smith",
+                  "split": 40,
+                  "ipi": "00012345678",
+                  "role": "Composer",
+                  "pro": "ASCAP"
+                },
+                {
+                  "name": "Jane Doe",
+                  "split": 35,
+                  "ipi": "00087654321",
+                  "role": "Lyricist",
+                  "pro": "BMI"
+                },
+                {
+                  "name": "Mike Johnson",
+                  "split": 25,
+                  "ipi": "00076543210",
+                  "role": "Arranger",
+                  "pro": "SESAC"
+                }
+              ],
+              "rights": {
+                "collectingOrganization": "PRS",
+                "royaltyRate": 12.5,
+                "moralRights": {
+                  "enabled": true,
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                },
+                "publicPerformingRights": {
+                  "enabled": true,
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                },
+                "mechanicalRights": {
+                  "enabled": true,
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                }
+              }
+            },
+            "recording": {
+              "performers": [
+                {
+                  "name": "Various Artists",
+                  "role": "Primary Artist",
+                  "split": 40
+                }
+              ],
+              "producers": [
+                {
+                  "name": "Producer Name",
+                  "role": "Producer",
+                  "split": 20
+                }
+              ],
+              "masterOwner": {
+                "name": "Capitol Records",
+                "share": 100,
+                "percentage": 100
+              },
+              "rights": {
+                "territory": "WORLDWIDE",
+                "exclusive": true,
+                "startDate": "2025-02-27",
+                "endDate": "2095-02-10",
+                "neighbouringRights": {
+                  "enabled": true,
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                },
+                "masterLicenseTerms": {
+                  "text": "Exclusive worldwide license for all formats and mediums",
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                },
+                "performanceRoyalties": {
+                  "rate": 50,
+                  "territory": "WORLDWIDE",
+                  "term": "PERPETUAL"
+                }
+              }
+            },
+            "storyProtocolMetadata": {
+              "contentType": "MUSIC",
+              "contentRating": "ALL",
+              "contentLanguage": "en",
+              "contentGenre": [
+                "Rock",
+                "Jazz",
+                "Classical",
+                "Folk"
+              ],
+              "contentTags": [
+                "pop",
+                "summer",
+                "dance",
+                "2024"
+              ],
+              "contentCreators": [
+                "John Smith",
+                "Jane Doe",
+                "Mike Johnson"
+              ],
+              "contentLicense": "All Rights Reserved"
+            }
+          }
+        ]
+      },
+      "submitter": {
+        "name": "Demo User",
+        "role": "Label Representative",
+        "walletAddress": "0x1234567890123456789012345678901234567890",
+        "email": "demo@universalmusic.com",
+        "timestamp": "2025-02-27T00:30:06.160Z",
+        "signature": "demo-signature"
+      },
+      "notes": "This is a simulated submission with complete metadata for Story Protocol registration. All rights and splits have been properly allocated among the creators."
+    },
+    "ipMetadata": {
+      "title": "New Single 2025",
+      "description": "Music release: New Single 2025 (single). Released on 2025-03-27. UPC: 64757330924365",
+      "creators": [
+        {
+          "name": "Demo User",
+          "address": "0x1234567890123456789012345678901234567890",
+          "description": "Label Representative",
+          "contributionPercent": 100,
+          "socialMedia": []
+        }
+      ],
+      "mediaUrl": "",
+      "mediaType": "music",
+      "mediaHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "release": {
+        "title": "New Single 2025",
+        "type": "single",
+        "upc": "64757330924365",
+        "catalogNumber": "CAP001-7911",
+        "releaseDate": "2025-03-27",
+        "label": {
+          "name": "Capitol Records",
+          "id": "CAP001"
+        },
+        "genre": [
+          "Rock",
+          "Jazz",
+          "Classical",
+          "Folk"
+        ],
+        "territories": [
+          "WORLDWIDE",
+          "AFRICA"
+        ],
+        "distributionPlatforms": [
+          "Spotify",
+          "Amazon Music",
+          "YouTube Music",
+          "Deezer",
+          "Pandora",
+          "SoundCloud"
+        ]
+      },
+      "tracks": [
+        {
+          "position": 1,
+          "title": "Summer Breeze",
+          "duration": "3:30",
+          "isrc": "USUMG2508217",
+          "explicit": false,
+          "language": "en",
+          "composition": {
+            "title": "Summer Breeze (Original Mix)",
+            "iswc": "T-665418690-3",
+            "writers": [
+              {
+                "name": "John Smith",
+                "split": 40,
+                "ipi": "00012345678",
+                "role": "Composer",
+                "pro": "ASCAP"
+              },
+              {
+                "name": "Jane Doe",
+                "split": 35,
+                "ipi": "00087654321",
+                "role": "Lyricist",
+                "pro": "BMI"
+              },
+              {
+                "name": "Mike Johnson",
+                "split": 25,
+                "ipi": "00076543210",
+                "role": "Arranger",
+                "pro": "SESAC"
+              }
+            ],
+            "rights": {
+              "collectingOrganization": "PRS",
+              "royaltyRate": 12.5,
+              "moralRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "publicPerformingRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "mechanicalRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              }
+            }
+          },
+          "recording": {
+            "performers": [
+              {
+                "name": "Various Artists",
+                "role": "Primary Artist",
+                "split": 40
+              }
+            ],
+            "producers": [
+              {
+                "name": "Producer Name",
+                "role": "Producer",
+                "split": 20
+              }
+            ],
+            "masterOwner": {
+              "name": "Capitol Records",
+              "share": 100,
+              "percentage": 100
+            },
+            "rights": {
+              "territory": "WORLDWIDE",
+              "exclusive": true,
+              "startDate": "2025-02-27",
+              "endDate": "2095-02-10",
+              "neighbouringRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "masterLicenseTerms": {
+                "text": "Exclusive worldwide license for all formats and mediums",
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "performanceRoyalties": {
+                "rate": 50,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              }
+            }
+          }
+        }
+      ],
+      "submitter": {
+        "name": "Demo User",
+        "role": "Label Representative",
+        "walletAddress": "0x1234567890123456789012345678901234567890",
+        "email": "demo@universalmusic.com",
+        "timestamp": "2025-02-27T00:30:06.160Z"
+      }
+    },
+    "nftMetadata": {
+      "name": "New Single 2025 - single",
+      "description": "Music release: New Single 2025. UPC: 64757330924365. Contains 1 tracks.",
+      "attributes": [
+        {
+          "trait_type": "Release Type",
+          "value": "single"
+        },
+        {
+          "trait_type": "Release Date",
+          "value": "2025-03-27"
+        },
+        {
+          "trait_type": "UPC",
+          "value": "64757330924365"
+        },
+        {
+          "trait_type": "Catalog Number",
+          "value": "CAP001-7911"
+        },
+        {
+          "trait_type": "Number of Tracks",
+          "value": 1
+        },
+        {
+          "trait_type": "Label",
+          "value": "Capitol Records"
+        },
+        {
+          "trait_type": "Label ID",
+          "value": "CAP001"
+        },
+        {
+          "trait_type": "Genre",
+          "value": "Rock, Jazz, Classical, Folk"
+        },
+        {
+          "trait_type": "Territories",
+          "value": "WORLDWIDE, AFRICA"
+        },
+        {
+          "trait_type": "Distribution Platforms",
+          "value": "Spotify, Amazon Music, YouTube Music, Deezer, Pandora, SoundCloud"
+        },
+        {
+          "trait_type": "Submitter",
+          "value": "Demo User"
+        },
+        {
+          "trait_type": "Submitter Role",
+          "value": "Label Representative"
+        },
+        {
+          "trait_type": "Submission Date",
+          "value": "2025-02-27T00:30:06.160Z"
+        }
+      ],
+      "completeMetadata": {
+        "release": {
+          "title": "New Single 2025",
+          "type": "single",
+          "upc": "64757330924365",
+          "catalogNumber": "CAP001-7911",
+          "releaseDate": "2025-03-27",
+          "label": {
+            "name": "Capitol Records",
+            "id": "CAP001"
+          },
+          "genre": [
+            "Rock",
+            "Jazz",
+            "Classical",
+            "Folk"
+          ],
+          "territories": [
+            "WORLDWIDE",
+            "AFRICA"
+          ],
+          "distributionPlatforms": [
+            "Spotify",
+            "Amazon Music",
+            "YouTube Music",
+            "Deezer",
+            "Pandora",
+            "SoundCloud"
+          ],
+          "tracks": [
+            {
+              "position": 1,
+              "title": "Summer Breeze",
+              "duration": "3:30",
+              "isrc": "USUMG2508217",
+              "explicit": false,
+              "language": "en",
+              "composition": {
+                "title": "Summer Breeze (Original Mix)",
+                "iswc": "T-665418690-3",
+                "writers": [
+                  {
+                    "name": "John Smith",
+                    "split": 40,
+                    "ipi": "00012345678",
+                    "role": "Composer",
+                    "pro": "ASCAP"
+                  },
+                  {
+                    "name": "Jane Doe",
+                    "split": 35,
+                    "ipi": "00087654321",
+                    "role": "Lyricist",
+                    "pro": "BMI"
+                  },
+                  {
+                    "name": "Mike Johnson",
+                    "split": 25,
+                    "ipi": "00076543210",
+                    "role": "Arranger",
+                    "pro": "SESAC"
+                  }
+                ],
+                "rights": {
+                  "collectingOrganization": "PRS",
+                  "royaltyRate": 12.5,
+                  "moralRights": {
+                    "enabled": true,
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  },
+                  "publicPerformingRights": {
+                    "enabled": true,
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  },
+                  "mechanicalRights": {
+                    "enabled": true,
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  }
+                }
+              },
+              "recording": {
+                "performers": [
+                  {
+                    "name": "Various Artists",
+                    "role": "Primary Artist",
+                    "split": 40
+                  }
+                ],
+                "producers": [
+                  {
+                    "name": "Producer Name",
+                    "role": "Producer",
+                    "split": 20
+                  }
+                ],
+                "masterOwner": {
+                  "name": "Capitol Records",
+                  "share": 100,
+                  "percentage": 100
+                },
+                "rights": {
+                  "territory": "WORLDWIDE",
+                  "exclusive": true,
+                  "startDate": "2025-02-27",
+                  "endDate": "2095-02-10",
+                  "neighbouringRights": {
+                    "enabled": true,
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  },
+                  "masterLicenseTerms": {
+                    "text": "Exclusive worldwide license for all formats and mediums",
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  },
+                  "performanceRoyalties": {
+                    "rate": 50,
+                    "territory": "WORLDWIDE",
+                    "term": "PERPETUAL"
+                  }
+                }
+              },
+              "storyProtocolMetadata": {
+                "contentType": "MUSIC",
+                "contentRating": "ALL",
+                "contentLanguage": "en",
+                "contentGenre": [
+                  "Rock",
+                  "Jazz",
+                  "Classical",
+                  "Folk"
+                ],
+                "contentTags": [
+                  "pop",
+                  "summer",
+                  "dance",
+                  "2024"
+                ],
+                "contentCreators": [
+                  "John Smith",
+                  "Jane Doe",
+                  "Mike Johnson"
+                ],
+                "contentLicense": "All Rights Reserved"
+              }
+            }
+          ]
+        },
+        "submitter": {
+          "name": "Demo User",
+          "role": "Label Representative",
+          "walletAddress": "0x1234567890123456789012345678901234567890",
+          "email": "demo@universalmusic.com",
+          "timestamp": "2025-02-27T00:30:06.160Z",
+          "signature": "demo-signature"
+        },
+        "notes": "This is a simulated submission with complete metadata for Story Protocol registration. All rights and splits have been properly allocated among the creators."
+      },
+      "tracks": [
+        {
+          "position": 1,
+          "title": "Summer Breeze",
+          "duration": "3:30",
+          "isrc": "USUMG2508217",
+          "explicit": false,
+          "language": "en",
+          "composition": {
+            "title": "Summer Breeze (Original Mix)",
+            "iswc": "T-665418690-3",
+            "writers": [
+              {
+                "name": "John Smith",
+                "ipi": "00012345678",
+                "role": "Composer",
+                "split": 40,
+                "publisher": null,
+                "pro": "ASCAP"
+              },
+              {
+                "name": "Jane Doe",
+                "ipi": "00087654321",
+                "role": "Lyricist",
+                "split": 35,
+                "publisher": null,
+                "pro": "BMI"
+              },
+              {
+                "name": "Mike Johnson",
+                "ipi": "00076543210",
+                "role": "Arranger",
+                "split": 25,
+                "publisher": null,
+                "pro": "SESAC"
+              }
+            ],
+            "rights": {
+              "collectingOrganization": "PRS",
+              "royaltyRate": 12.5,
+              "moralRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "publicPerformingRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "mechanicalRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              }
+            }
+          },
+          "recording": {
+            "performers": [
+              {
+                "name": "Various Artists",
+                "role": "Primary Artist",
+                "split": 40
+              }
+            ],
+            "producers": [
+              {
+                "name": "Producer Name",
+                "role": "Producer",
+                "split": 20
+              }
+            ],
+            "masterOwner": {
+              "name": "Capitol Records",
+              "percentage": 100
+            },
+            "rights": {
+              "territory": "WORLDWIDE",
+              "exclusive": true,
+              "startDate": "2025-02-27",
+              "endDate": "2095-02-10",
+              "neighbouringRights": {
+                "enabled": true,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "masterLicenseTerms": {
+                "text": "Exclusive worldwide license for all formats and mediums",
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              },
+              "performanceRoyalties": {
+                "rate": 50,
+                "territory": "WORLDWIDE",
+                "term": "PERPETUAL"
+              }
+            }
+          },
+          "storyProtocolMetadata": {
+            "contentType": "MUSIC",
+            "contentRating": "ALL",
+            "contentLanguage": "en",
+            "contentGenre": [
+              "Rock",
+              "Jazz",
+              "Classical",
+              "Folk"
+            ],
+            "contentTags": [
+              "pop",
+              "summer",
+              "dance",
+              "2024"
+            ],
+            "contentCreators": [
+              "John Smith",
+              "Jane Doe",
+              "Mike Johnson"
+            ],
+            "contentLicense": "All Rights Reserved"
+          }
+        }
+      ]
+    },
+    "ipMetadataURI": "ipfs://bafkreignpnkmonwntw2ktq2vxjm7w5pcha4yvbakthnyrlpjgjmoozgk7i",
+    "nftMetadataURI": "ipfs://bafkreifhpwhlxmf2rhvewjo2f5bu4gfzorizrxmy6ntjxunni7z7orguvy"
+  },
+  "timestamp": "2025-02-27T00:30:18.899Z",
+  "network": "sepolia"
+}
